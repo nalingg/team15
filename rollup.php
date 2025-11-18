@@ -1,7 +1,4 @@
 <?php
-// rollup.php
-$conn = new mysqli("localhost", "team15", "team15", "team15");
-$conn->set_charset("utf8");
 
 //로그인
 $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8mb4";
@@ -14,6 +11,10 @@ try {
 } catch (PDOException $e) {
     die('DB 연결 실패: ' . $e->getMessage());
 }
+
+//db연결
+$conn = new mysqli("localhost", "team15", "team15", "team15");
+$conn->set_charset("utf8");
 
 // 선택된 metric
 $metric = $_GET['metric'] ?? 'score';
