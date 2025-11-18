@@ -3,6 +3,18 @@
 $conn = new mysqli("localhost", "team15", "team15", "team15");
 $conn->set_charset("utf8");
 
+//로그인
+$dsn = "mysql:host={$host};dbname={$dbname};charset=utf8mb4";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]);
+} catch (PDOException $e) {
+    die('DB 연결 실패: ' . $e->getMessage());
+}
+
 // 선택된 metric
 $metric = $_GET['metric'] ?? 'score';
 
