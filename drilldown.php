@@ -1,13 +1,4 @@
 <?php
-// ------------------------
-// PHP: Ajax 데이터 처리
-// ------------------------
-header('Content-Type: text/html; charset=utf-8');
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-
-$conn = new mysqli("localhost", "team15", "team15", "team15");
-$conn->set_charset("utf8");
-
 //로그인
 $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8mb4";
 
@@ -19,6 +10,14 @@ try {
 } catch (PDOException $e) {
     die('DB 연결 실패: ' . $e->getMessage());
 }
+// ------------------------
+// PHP: Ajax 데이터 처리
+// ------------------------
+header('Content-Type: text/html; charset=utf-8');
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+
+$conn = new mysqli("localhost", "team15", "team15", "team15");
+$conn->set_charset("utf8");
 
 // Ajax 호출인지 확인
 $isAjax = isset($_GET['team']) && isset($_GET['metric']);
