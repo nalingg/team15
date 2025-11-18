@@ -5,7 +5,7 @@
 header('Content-Type: text/html; charset=utf-8');
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
-$conn = new mysqli("localhost", "root", "", "testdb");
+$conn = new mysqli("localhost", "team15", "team15", "team15");
 $conn->set_charset("utf8");
 
 // Ajax 호출인지 확인
