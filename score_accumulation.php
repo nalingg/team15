@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- 네비게이션 생략 없이 유지 -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="dashboard.html">V-League 스카우팅 툴</a>
+                <a class="navbar-brand" href="dashboard.php">V-League 스카우팅 툴</a>
             </div>
         </nav>
 

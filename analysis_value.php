@@ -77,14 +77,14 @@ try {
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="dashboard.html">V-League 스카우팅 툴</a>
+                <a class="navbar-brand" href="dashboard.php">V-League 스카우팅 툴</a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="dashboard.html">대시보드</a></li>
-                        <li class="nav-item"><a class="nav-link" href="player_profile.html">선수 정보</a></li>
+                        <li class="nav-item"><a class="nav-link" href="dashboard.php">대시보드</a></li>
+                        <li class="nav-item"><a class="nav-link" href="player_profile.php">선수 정보</a></li>
                         <li class="nav-item"><a class="nav-link active" href="analysis_value.php">고급 분석</a></li>
                     </ul>
-                    <a href="login.html" class="btn btn-outline-light">로그아웃</a>
+                    <a href="login.php" class="btn btn-outline-light">로그아웃</a>
                 </div>
             </div>
         </nav>
