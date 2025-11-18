@@ -1,6 +1,20 @@
 <?php
 
-include 'db_connect.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+require_once 'db.php';
+
+// 1) 로그인 체크
+if (!isset($_SESSION['user_id'], $_SESSION['team_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+$team_id = $_SESSION['team_id'];
 
 $result = null;
 
@@ -35,11 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ORDER BY
                 cost_per_point ASC";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $position_id_query, $min_salary_query);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
+try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$position_id_query, $min_salary_query]);
+        $rows = $stmt->fetchAll();
+
+    } catch (PDOException $e) {
+        die("쿼리 실행 오류: " . $e->getMessage());
+    }
 }
 ?>
 
@@ -127,9 +144,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <tbody>
                 <?php
-                if ($result && $result->num_rows > 0) {
+                if (!empty($rows)) {
                     $rank = 1;
-                    while($row = $result->fetch_assoc()) {
+                    foreach ($rows as $row) {
                 ?>
                         <tr>
                             <td><?php echo $rank++; ?></td>
@@ -137,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <td><?php echo htmlspecialchars($row['position_Name']); ?></td>
                             <td><?php echo number_format($row['salary']); ?></td>
                             <td><?php echo number_format($row['total_points']); ?></td>
-                            <td><?php echo number_format($row['cost_per_point'], 1); ?> 백만원</td> <!-- 단위 '백만원' -> '만원'으로 수정 -->
+                            <td><?php echo number_format($row['cost_per_point'], 1); ?> 백만원</td>
                         </tr>
                 <?php
                     }
@@ -156,8 +173,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <?php
-    $conn->close();
-    ?>
 </body>
 </html>
