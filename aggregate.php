@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'], $_SESSION['team_id'])) {
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-$conn = new mysqli("localhost","root","","testdb");
+$conn = new mysqli("localhost","team15","team15","team15");
 $conn->set_charset("utf8");
 
 $team_id = isset($_GET["team_id"]) ? $_GET["team_id"] : 0;
