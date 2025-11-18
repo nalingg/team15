@@ -1,6 +1,6 @@
 <?php
 // rollup.php
-$conn = new mysqli("localhost", "root", "", "testdb");
+$conn = new mysqli("localhost", "team15", "team15", "team15");
 $conn->set_charset("utf8");
 
 // 선택된 metric
