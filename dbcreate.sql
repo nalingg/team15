@@ -1,3 +1,7 @@
+CREATE DATABASE team15;
+USE team15;
+
+
 CREATE TABLE Team (
     team_ID INT PRIMARY KEY,
     team_Name VARCHAR(50) NOT NULL UNIQUE,
