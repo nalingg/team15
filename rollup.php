@@ -146,19 +146,40 @@ body { padding: 20px; font-family: 'Inter', sans-serif; }
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
-<div class="container-fluid">
-<a class="navbar-brand" href="dashboard.php">V-League 스카우팅 툴</a>
-<div class="collapse navbar-collapse">
-<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<li class="nav-item"><a class="nav-link" href="dashboard.php">대시보드</a></li>
-<li class="nav-item"><a class="nav-link" href="player_profile.php">선수 정보</a></li>
-<li class="nav-item"><a class="nav-link active" href="rollup.php">Rollup</a></li>
-</ul>
-<a href="login.php" class="btn btn-outline-light">로그아웃</a>
-</div>
-</div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
+        <div class="container-fluid">
+            <!-- 좌측 로고/브랜드: 클릭 시 대시보드로 -->
+            <a class="navbar-brand" href="dashboard.php">V-League 스카우팅 툴</a>
+
+            <div class="collapse navbar-collapse">
+                <!-- 좌측 메뉴 목록 -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- 현재 페이지: 대시보드 -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.php">대시보드</a>
+                    </li>
+
+                    <!-- 선수 CRUD 및 스카우팅 노트 등에서 사용할 선수 정보 관리 페이지 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="player_select.php">선수 정보 (CRUD)</a>
+                    </li>
+
+                    <!-- 내 스카우팅 노트 목록 페이지 (mode=mine: 내 노트만 보기) -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="mynotes.php?mode=mine">내 스카우팅 노트</a>
+                    </li>
+
+                    <!-- 고급 분석 메뉴 (가성비, 팀 킬러, 등등) -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="analysis_value.php">고급 분석</a>
+                    </li>
+                </ul>
+
+                <!-- 우측 상단 로그아웃 버튼 -->
+                <a href="logout.php" class="btn btn-outline-light">로그아웃</a>
+            </div>
+        </div>
+    </nav>
 
 <h1 class="mb-4 display-6 fw-bold text-primary text-center">팀별 스탯 순위 분석</h1>
 
