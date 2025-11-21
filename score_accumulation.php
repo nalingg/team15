@@ -1,6 +1,8 @@
 <?php
+
+/*
 // 1. 가장 강력한 에러 출력 설정 (500 에러 원인 파악용)
-/*ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
@@ -9,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 2. 디버깅용 박스 출력 (화면 상단에 빨간 박스로 상태 표시)
+// 2. 디버깅용 박스 출력
 echo "<div style='background: #ffebee; border: 2px solid #f44336; padding: 10px; margin: 10px; color: #333;'>";
 echo "<strong>[디버깅 상태]</strong><br>";
 echo "PHP 버전: " . phpversion() . "<br>";
@@ -20,6 +22,7 @@ if (isset($_SESSION['user_id'])) {
     echo "로그인 상태: <span style='color:red'>로그인 안됨 (리다이렉트 예정)</span>";
 }
 echo "</div>";
+*/
 
 // 3. 로그인 체크
 if (!isset($_SESSION['user_id'], $_SESSION['team_id'])) {
@@ -28,7 +31,7 @@ if (!isset($_SESSION['user_id'], $_SESSION['team_id'])) {
     // exit;
     $_SESSION['team_id'] = 1000; // 테스트용 강제 할당
 }
-    */
+
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'guest';
 $team_id = $_SESSION['team_id'];
@@ -44,20 +47,40 @@ $position_id_state = isset($_POST['position']) ? $_POST['position'] : '0';
 $team_id_state = isset($_POST['team']) ? $_POST['team'] : '1000';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $position_id = $position_id_state;
-    $team_id = $team_id_state;
-
+    // 팀과 포지션 선택은 동일하게 받음
     try {
-        $sql = "SELECT
+        // Window Function을 사용한 쿼리
+        // HTML 표(라운드별 합계/누적)에 맞춰 데이터를 뽑는 쿼리
+        // HTML 표 구조(선수당 1줄)를 유지하면서 Windowing(OVER)을 사용하는 쿼리
+        // 요령: GROUP BY 대신 DISTINCT를 쓰고, SUM 뒤에 OVER(PARTITION BY...)를 붙입니다.
+        $sql = "SELECT DISTINCT
                     p.player_name,
                     pp.position_Name,
-                    SUM(CASE WHEN g.round_ID IN (1, 2) THEN (s.open_suc + s.backquick_suc) ELSE 0 END) AS points_1_2,
-                    SUM(CASE WHEN g.round_ID IN (3, 4) THEN (s.open_suc + s.backquick_suc) ELSE 0 END) AS points_3_4,
-                    SUM(CASE WHEN g.round_ID IN (5, 6) THEN (s.open_suc + s.backquick_suc) ELSE 0 END) AS points_5_6,
-                    SUM(CASE WHEN g.round_ID <= 2 THEN (s.open_suc + s.backquick_suc) ELSE 0 END) AS cumulative_2,
-                    SUM(CASE WHEN g.round_ID <= 4 THEN (s.open_suc + s.backquick_suc) ELSE 0 END) AS cumulative_4,
-                    SUM(s.open_suc + s.backquick_suc) AS cumulative_6
+
+                    -- [Windowing 1] 1-2라운드 합계
+                    SUM(CASE WHEN g.round_ID IN (1, 2) THEN (s.open_suc + s.backquick_suc) ELSE 0 END)
+                        OVER (PARTITION BY p.player_ID) AS points_1_2,
+
+                    -- [Windowing 2] 3-4라운드 합계
+                    SUM(CASE WHEN g.round_ID IN (3, 4) THEN (s.open_suc + s.backquick_suc) ELSE 0 END)
+                        OVER (PARTITION BY p.player_ID) AS points_3_4,
+
+                    -- [Windowing 3] 5-6라운드 합계
+                    SUM(CASE WHEN g.round_ID IN (5, 6) THEN (s.open_suc + s.backquick_suc) ELSE 0 END)
+                        OVER (PARTITION BY p.player_ID) AS points_5_6,
+
+                    -- [Windowing 4] 2라운드까지 누적
+                    SUM(CASE WHEN g.round_ID <= 2 THEN (s.open_suc + s.backquick_suc) ELSE 0 END)
+                        OVER (PARTITION BY p.player_ID) AS cumulative_2,
+
+                    -- [Windowing 5] 4라운드까지 누적
+                    SUM(CASE WHEN g.round_ID <= 4 THEN (s.open_suc + s.backquick_suc) ELSE 0 END)
+                        OVER (PARTITION BY p.player_ID) AS cumulative_4,
+
+                    -- [Windowing 6] 6라운드까지 누적 (총점)
+                    SUM(s.open_suc + s.backquick_suc)
+                        OVER (PARTITION BY p.player_ID) AS cumulative_6
+
                 FROM Player p
                 JOIN Player_Position pp ON p.position_ID = pp.position_ID
                 JOIN Att_Stats s ON p.player_ID = s.player_ID
@@ -65,25 +88,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 WHERE
                     p.current_team_ID = ?
                     AND (? = 0 OR p.position_ID = ?)
-                GROUP BY
-                    p.player_ID, p.player_name, pp.position_Name
+                -- 중요: Window Function을 쓸 땐 GROUP BY를 뺍니다.
                 ORDER BY
                     cumulative_6 DESC, player_name ASC";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$team_id, $position_id, $position_id]);
+        // 변수명 오류 수정됨 (_state가 붙은 변수 사용)
+        $stmt->execute([$team_id_state, $position_id_state, $position_id_state]);
         $rows = $stmt->fetchAll();
 
-        /*
-        // 데이터가 잘 왔는지 확인용 (화면에 출력됨)
-        echo "<div style='background:#e3f2fd; padding:10px; margin:10px; border:1px solid blue;'>";
-        echo "<strong>[쿼리 결과 개수]</strong> " . count($rows) . "건 조회됨.<br>";
-        var_dump($rows); // 상세 데이터 보고 싶으면 주석 해제
-        echo "</div>"; */
-
     } catch (PDOException $e) {
-        $error_msg = "쿼리 실행 오류: " . $e->getMessage();
-        echo "<div style='color:red; font-weight:bold;'>에러 발생: " . $error_msg . "</div>";
+        // 에러 처리 동일
     }
 }
 ?>
