@@ -29,11 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $sql = "SELECT
+                ROW_NUMBER() OVER (ORDER BY p.salary / 4 / NULLIF(SUM(s.open_suc + s.backquick_suc), 0) ASC) AS ranking,
                 p.player_name,
                 pp.position_Name,
                 p.salary,
                 SUM(s.open_suc + s.backquick_suc) AS total_points,
-                (p.salary / NULLIF(SUM(s.open_suc + s.backquick_suc), 0)) AS cost_per_point
+                (p.salary / 4 / NULLIF(SUM(s.open_suc + s.backquick_suc), 0)) AS cost_per_point
             FROM
                 Player p
             JOIN
@@ -164,16 +165,15 @@ try {
             <tbody>
                 <?php
                 if (!empty($rows)) {
-                    $rank = 1;
                     foreach ($rows as $row) {
                 ?>
                         <tr>
-                            <td><?php echo $rank++; ?></td>
-                            <td><?php echo htmlspecialchars($row['player_name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['position_Name']); ?></td>
-                            <td><?php echo number_format($row['salary']); ?></td>
-                            <td><?php echo number_format($row['total_points']); ?></td>
-                            <td><?php echo number_format($row['cost_per_point'], 1); ?> 백만원</td>
+                             <td><?php echo $row['ranking']; ?> </td>
+                             <td><?php echo htmlspecialchars($row['player_name']); ?></td>
+                             <td><?php echo htmlspecialchars($row['position_Name']); ?></td>
+                             <td><?php echo number_format($row['salary']); ?></td>
+                             <td><?php echo number_format($row['total_points']); ?></td>
+                             <td><?php echo number_format($row['cost_per_point'], 1); ?> 백만원</td>
                         </tr>
                 <?php
                     }
@@ -186,6 +186,7 @@ try {
                 }
                 ?>
             </tbody>
+
         </table>
 
     </div>
