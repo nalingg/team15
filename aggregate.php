@@ -94,7 +94,7 @@ $res = $stmt->get_result();
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="dashboard.html">대시보드</a></li>
                     <li class="nav-item"><a class="nav-link" href="player_profile.html">선수 정보</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="aggregate.php">고급 분석</a></li>
+                    //고급분석 삭제
                 </ul>
                 <a href="login.html" class="btn btn-outline-light">로그아웃</a>
             </div>
