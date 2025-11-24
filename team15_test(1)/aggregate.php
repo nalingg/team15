@@ -85,7 +85,7 @@ $res = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>범실 총합 분석 (Aggregate)</title>
+    <title>범실 총합 분석 </title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -194,7 +194,7 @@ $res = $stmt->fetchAll();
     <div class="p-4 mb-4 info-box">
         <h2 class="fw-bold mb-2 text-primary">범실 총합 분석 (Aggregate)</h2>
         <p class="mb-0 text-muted">
-            공격스 / 리베로 / 세터의 범실을 합산하여 선수별 범실 총합을 비교합니다.
+            공격수 / 리베로 / 세터의 범실을 합산하여 선수별 범실 총합을 비교합니다.
         </p>
     </div>
 
@@ -261,4 +261,5 @@ $res = $stmt->fetchAll();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
