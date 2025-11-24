@@ -141,10 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a class="nav-link" href="mynotes.php?mode=mine">내 스카우팅 노트</a>
                     </li>
 
-                    <!-- 고급 분석 메뉴 (가성비, 팀 킬러, 등등) -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="analysis_value.php">고급 분석</a>
-                    </li>
+                    //고급 분석 삭제
                 </ul>
 
                 <!-- 우측 상단 로그아웃 버튼 -->
