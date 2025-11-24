@@ -192,7 +192,7 @@ $res = $stmt->fetchAll();
 
     <!-- 타이틀/설명 -->
     <div class="p-4 mb-4 info-box">
-        <h2 class="fw-bold mb-2 text-primary">범실 총합 분석 (Aggregate)</h2>
+        <h2 class="fw-bold mb-2 text-primary">범실 총합 분석</h2>
         <p class="mb-0 text-muted">
             공격수 / 리베로 / 세터의 범실을 합산하여 선수별 범실 총합을 비교합니다.
         </p>
@@ -263,3 +263,4 @@ $res = $stmt->fetchAll();
 </body>
 
 </html>
+
