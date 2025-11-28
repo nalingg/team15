@@ -12,7 +12,7 @@ INSERT INTO Team (team_ID, team_name, home_arena) VALUES
 (4000, 'IBK기업은행', '화성'),
 (5000, '한국도로공사', '김천'),
 (6000, '페퍼저축은행', '광주'),
-(7000, '흥국생명 ', '인천');
+(7000, '흥국생명', '인천');
 
 -- Player_Position 데이터
 INSERT INTO Player_Position (position_ID, position_name) VALUES
