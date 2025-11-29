@@ -1,4 +1,7 @@
 <?php
+
+// 김나현
+
 require_once 'db.php';
 session_start();
 
