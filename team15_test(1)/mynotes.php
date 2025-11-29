@@ -1,4 +1,7 @@
 <?php
+
+// 오지송
+
 // mynotes.php
 session_start();
 
@@ -442,4 +445,5 @@ function deleteWithPassword(form) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
