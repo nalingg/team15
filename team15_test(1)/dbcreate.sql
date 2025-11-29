@@ -1,4 +1,4 @@
-CREATE DATABASE team15;
+CREATE DATABASE if not exists team15;
 USE team15;
 
 
