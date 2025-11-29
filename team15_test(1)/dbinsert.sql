@@ -1,3 +1,5 @@
+/*creater name: Nahyun Kim, Namryung Kim*/
+
 USE team15;
 
 SET character_set_client = utf8mb4;

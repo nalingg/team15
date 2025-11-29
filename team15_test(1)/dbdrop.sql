@@ -1,3 +1,4 @@
+/*creater name: Nahyun Kim*/
 USE team15;
 SET FOREIGN_KEY_CHECKS = 0;
 

@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 -- 김남령
+=======
+/*creater name: Namryung Kim*/
+>>>>>>> Stashed changes
 
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
