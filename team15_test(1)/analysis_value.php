@@ -1,4 +1,7 @@
 <?php
+
+// 김남령
+
 // analysis_value.php
 // 가성비 선수 랭킹 분석 페이지
 
