@@ -1,3 +1,5 @@
+//creater name: Nahyun Kim
+
 CREATE DATABASE if not exists team15;
 USE team15;
 
