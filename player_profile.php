@@ -1,4 +1,7 @@
 <?php
+
+// 오지송
+
 // player_profile.php
 session_start();
 require_once 'db_connect.php';   // 여기서 $conn (mysqli) 사용
@@ -364,4 +367,5 @@ $stmt->close();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
