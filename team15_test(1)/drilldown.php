@@ -1,4 +1,7 @@
 <?php
+
+// 김나현
+
 session_start();
 
 // 현재 페이지 판별 (네비 active용)
