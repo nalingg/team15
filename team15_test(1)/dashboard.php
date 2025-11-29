@@ -1,6 +1,6 @@
 <?php
 
-// 오지송
+// 안지은, 오지송
 
 session_start();
 require_once 'db.php';
@@ -204,4 +204,5 @@ $team_name = $row ? $row['team_Name'] : ($team_id . "번 팀");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
