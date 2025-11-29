@@ -1,4 +1,7 @@
 <?php
+
+// 오지송
+
 session_start();
 require_once 'db.php';   // PDO $pdo 사용
 
@@ -170,4 +173,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 </body>
+
 </html>
