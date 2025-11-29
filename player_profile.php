@@ -4,7 +4,7 @@
 
 // player_profile.php
 session_start();
-require_once 'db_connect.php';   // 여기서 $conn (mysqli) 사용
+require_once 'db_connect.php';   
 
 // 1) 로그인 체크
 if (!isset($_SESSION['user_id'], $_SESSION['team_id'])) {
@@ -369,3 +369,4 @@ $stmt->close();
 </body>
 
 </html>
+
