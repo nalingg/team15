@@ -1,6 +1,6 @@
 <?php
 
-// 오지
+// 오지송
 
 // player_select.php
 session_start();
@@ -184,3 +184,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </body>
 
 </html>
+
