@@ -1,4 +1,7 @@
 <?php
+
+// 김남령
+
 session_start();
 require_once 'db.php';   // PDO $pdo 사용
 
