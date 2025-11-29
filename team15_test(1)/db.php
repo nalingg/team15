@@ -1,4 +1,7 @@
 <?php
+
+// 김남령
+
 // db.php
 $host   = 'localhost';
 $dbname = 'team15';
