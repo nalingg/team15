@@ -1,4 +1,7 @@
 <?php
+
+// 안지은
+
 // aggregate.php
 // 공격수/리베로/세터 범실(mis/fail) 총합 비교 Aggregate 분석 페이지
 
@@ -263,3 +266,4 @@ $res = $stmt->fetchAll();
 </body>
 
 </html>
+
